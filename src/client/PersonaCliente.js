@@ -1,39 +1,48 @@
-import axios from "axios";
 
-const obtenerPorId = async(id)=>{
-    //http://localhost:8080/matriculaAPI/v1.1/personas/1
-    axios.get(`http:localhost:8081/matriculaAPI/v1.1/personas/${id}`).then(r=>r.data);
-     console.log(data);
-     return data;
+import axios from 'axios';
+
+const obtenerPorId = async (id) => {
+    const response = await axios.get(`http://localhost:8081/matriculaAPI/v1.1/personas/${id}`);
+    console.log(response.data);
+    return response.data;
+
 }
 
-const insertar = async(body)=>{
-    axios.post('http:localhost:8081/matriculaAPI/v1.1/personas',body).then(r=>r.data);
-    
+const insertar = async (body) => {
+    axios.post(`http://localhost:8081/matriculaAPI/v1.1/personas`, body).then(r => r.data);
+
 }
 
-const actualizarParcial = async(id,body)=>{
-    axios.pach(`http:localhost:8081/matriculaAPI/v1.1/personas/${id}`).then(r=>r.data);
-    
+const actualizar = async (id, body) => {
+    axios.put(`http://localhost:8081/matriculaAPI/v1.1/personas/${id}`, body).then(r => r.data);
 }
 
-const actualizar = async(id,body)=>{
-    axios.put(`http:localhost:8081/matriculaAPI/v1.1/personas/${id}`).then(r=>r.data);
-    
+const actualizarParcial = async (id, body) => {
+    axios.patch(`http://localhost:8081/matriculaAPI/v1.1/personas/${id}`, body).then(r => r.data);
 }
 
-const eliminar = async(id)=>{
-    axios.delete(`http:localhost:8081/matriculaAPI/v1.1/personas/${id}`).then(r=>r.data);
-    
+const brrar = async(id) =>{
+    axios.delete(`http://localhost:8081/matriculaAPI/v1.1/personas/${id}`).then(r => r.data);    
 }
 
 
 
-export const obtenerPorFachada = async(id)=>{
+export const obtenerPorIdFachada  = async (id) => {
     return await obtenerPorId(id);
+}
 
+export const insertarFachada = async (body) => {
+    await insertar(body);
 }
-const insertarFachada = async(body)=>{
-   await insertar(body);
-    
+
+export const actualizarFachada  = async (id, body) => {
+    return await actualizar(id, body);
 }
+
+export const actualziarParcialFachada = async (id, body) => {
+    await actualizarParcial(id, body);
+}
+export const eliminarachada  = async (id) => {
+    return await brrar(id);
+}
+
